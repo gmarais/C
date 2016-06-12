@@ -9,6 +9,7 @@ sources/game.c \
 sources/go.c \
 sources/tick_objects.c \
 sources/base_weapon.c \
+sources/tact_weapon.c \
 sources/spawn_ships.c \
 sources/collisions.c \
 sources/explosions.c \

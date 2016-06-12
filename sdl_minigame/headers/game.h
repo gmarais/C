@@ -124,10 +124,8 @@ void remove_go(lst_t **elem);
 // spawn_ships.c
 void spawn_player();
 void spawn_enemy(float pos_y);
+void spawn_tact_enemy(float pos_y);
 void spawn_destroyer(float pos_y);
-// spawn_projectiles.c
-void spawn_player_projectile();
-void spawn_enemy_projectile(vector2 pos);
 // ai.c
 ai_handler_t *new_enemy_ai();
 // collisions.c

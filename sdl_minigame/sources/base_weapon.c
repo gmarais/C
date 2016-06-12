@@ -8,7 +8,7 @@ static void spawn_base_projectile(vector2 pos, vector2 dir, enum e_owner owner)
 	projectile->life_max = 1;
 	projectile->pos = pos;
 	projectile->dir = dir;
-	projectile->speed = owner == (PLAYER) ? 1600.0f : 1200.0f;
+	projectile->speed = owner == (PLAYER) ? 1400.0f : 1000.0f;
 	projectile->img_index = owner == (PLAYER) ? 1 : 3;
 	projectile->animator = 0;
 	projectile->collider = new_collider();
@@ -47,7 +47,7 @@ weapon_t *new_base_weapon(vector2 pos)
 	w->last_shot = g_data.last_time;
 	w->ammunitions = w->max_rounds = 1;
 	w->reload_time = 0.0f;
-	w->fire_interval = 0.4f * CLOCKS_PER_SEC;
+	w->fire_interval = 0.45f * CLOCKS_PER_SEC;
 	w->fire = &base_weapon_fire;
 	w->pos = pos;
 	return w;

@@ -52,4 +52,3 @@ void apply_collisions(lst_t *elem)
 	}
 }
 
-

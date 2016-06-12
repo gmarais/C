@@ -21,7 +21,7 @@ static void move_object(go_t *go)
 
 static int go_is_alive(go_t *go)
 {
-	if (go->pos.x > 2048 || go->pos.x < -1024 || go->pos.y < -100 || go->pos.y > 740)
+	if (go->pos.x > 2048 || go->pos.x < -1024 || go->pos.y < -640 || go->pos.y > 1280)
 		return 0;
 	if (go->collider != 0 && go->life <= 0)
 		return 0;

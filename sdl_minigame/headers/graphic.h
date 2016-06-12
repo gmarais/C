@@ -1,7 +1,7 @@
 #ifndef _GRAPHIC_
 #define _GRAPHIC_
 
-#define IMG_NBR 13
+#define IMG_NBR 17
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>

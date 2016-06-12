@@ -25,8 +25,8 @@ void move_forward()
 	if (g_data.is_dead)
 		return;
 	float pos_x = g_data.player->pos.x +  (460.0f) * g_data.delta_time;
-	if (pos_x > 1024 - 75)
-		pos_x = 1024 - 75;
+	if (pos_x > 1024 - 35)
+		pos_x = 1024 - 35;
 	g_data.player->pos.x = pos_x;
 }
 
@@ -35,8 +35,8 @@ void move_backward()
 	if (g_data.is_dead)
 		return;
 	float pos_x = g_data.player->pos.x - (360.0f) * g_data.delta_time;
-	if (pos_x < 75)
-		pos_x = 75.0f;
+	if (pos_x < 35)
+		pos_x = 35.0f;
 	g_data.player->pos.x = pos_x;
 }
 
@@ -45,8 +45,8 @@ void move_up()
 	if (g_data.is_dead)
 		return;
 	float pos_y = g_data.player->pos.y - (560.0f) * g_data.delta_time;
-	if (pos_y < 0)
-		pos_y = 0.0f;
+	if (pos_y < 35)
+		pos_y = 35.0f;
 	g_data.player->pos.y = pos_y;
 }
 

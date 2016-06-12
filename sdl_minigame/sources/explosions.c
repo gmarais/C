@@ -35,11 +35,20 @@ void explode_enemy_ship(vector2 pos)
 	vector2 ex_pos;
 	while (i++ < 6)
 	{
-		ex_pos.x = pos.x - 60 + rand() % 120;
+		ex_pos.x = pos.x - 50 + rand() % 100;
 		ex_pos.y = pos.y - 35 + rand() % 70;
 		spawn_explosion(ex_pos);
 	}
-	spawn_enemy(rand() % 420 + 110);
+
+	if (rand() % 2 == 0)
+	{
+		spawn_enemy(rand() % 540 + 50);
+	}
+	else
+	{
+		spawn_tact_enemy(rand() % 540 + 50);
+	}
+
 	if (rand() % 6 == 0)
 		spawn_life_pickup(pos);
 }
@@ -65,9 +74,9 @@ void explode_ship(vector2 pos)
 	spawn_explosion(pos);
 	int i = 0;
 	vector2 ex_pos;
-	while (i++ < 6)
+	while (i++ < 4)
 	{
-		ex_pos.x = pos.x - 60 + rand() % 120;
+		ex_pos.x = pos.x - 31 + rand() % 62;
 		ex_pos.y = pos.y - 35 + rand() % 70;
 		spawn_explosion(ex_pos);
 	}
