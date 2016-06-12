@@ -4,6 +4,7 @@
 float move_y = 0.0f;
 float move_x = 0.0f;
 short int is_shooting = 0;
+short int is_windowed = 0;
 int key_hooks()
 {
     SDL_Event event;
@@ -41,8 +42,20 @@ int key_hooks()
         else if (event.type == SDL_KEYUP && event.key.keysym.scancode == 113 && move_x < 0)
 			move_x = 0.0f;
 
-        if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.scancode == 9))
+        if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.scancode == 9 && is_windowed))
 			return 1.0f;
+		else if (event.type == SDL_KEYDOWN && (event.key.keysym.scancode == 9 || event.key.keysym.scancode == 95) && !is_windowed)
+		{
+				SDL_putenv("SDL_VIDEO_CENTERED=center");
+				gd.screen = SDL_SetVideoMode(1024, 640, 32, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_RESIZABLE);
+				is_windowed = !is_windowed;
+		}
+		else if (event.type == SDL_KEYDOWN && event.key.keysym.scancode == 95 && is_windowed)
+		{
+				gd.screen = SDL_SetVideoMode(1024, 640, 32, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_RESIZABLE|SDL_FULLSCREEN);
+				is_windowed = !is_windowed;
+		}
+
 	}
 
 	if (move_y < 0)

@@ -15,7 +15,7 @@ void spawn_life_pickup(vector2 pos)
 	pu->pos = pos;
 	pu->dir.x = -1.0f;
 	pu->dir.y = 0.0f;
-	pu->speed = 400.0f;
+	pu->speed = 200.0f;
 	pu->img_index = 12;
 	pu->animator = 0;
 	pu->collider = new_collider();

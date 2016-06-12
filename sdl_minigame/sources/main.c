@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-    gd.screen = SDL_SetVideoMode(1024, 640, 32, SDL_HWSURFACE|SDL_DOUBLEBUF); // Ouverture de la fenêtre
+    gd.screen = SDL_SetVideoMode(1024, 640, 32, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_RESIZABLE|SDL_FULLSCREEN); // Ouverture de la fenêtre
 	if (gd.screen == NULL)
 	{
 		fprintf(stderr, "Couldn't initialize Video Mode: %s\n", SDL_GetError());
