@@ -16,7 +16,10 @@ static void spawn_base_projectile(vector2 pos, vector2 dir, enum e_owner owner)
 	projectile->collider->size.y = 12;
 	projectile->collider->damage = 1;
 	projectile->ai_handler = 0;
-	projectile->on_death = &spawn_explosion;
+	if (owner == PLAYER)
+		projectile->on_death = &explode_and_score;
+	else
+		projectile->on_death = &spawn_explosion;
 	add_back_go(projectile, &g_data.go_list);
 }
 

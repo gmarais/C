@@ -132,6 +132,7 @@ ai_handler_t *new_enemy_ai();
 void apply_collisions(lst_t *elem);
 // explosions.c
 void spawn_explosion(vector2 pos);
+void explode_and_score(vector2 pos);
 void explode_enemy_ship(vector2 pos);
 void explode_destroyer(vector2 pos);
 void explode_ship(vector2 pos);

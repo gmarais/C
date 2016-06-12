@@ -2,7 +2,6 @@
 
 void spawn_explosion(vector2 pos)
 {
-	g_data.score += 1;
 	go_t *explosion = new_go();
 	explosion->pos.x = pos.x - 5.0f;
 	explosion->pos.y = pos.y;
@@ -25,6 +24,12 @@ void spawn_explosion(vector2 pos)
 	explosion->ai_handler = 0;
 	explosion->on_death = 0;
 	add_back_go(explosion, &g_data.go_list);
+}
+
+void explode_and_score(vector2 pos)
+{
+	g_data.score += 1;
+	spawn_explosion(pos);
 }
 
 void explode_enemy_ship(vector2 pos)
