@@ -26,7 +26,8 @@ void draw_ui()
 
 void draw_bg()
 {
-	gd.bg_offset = (gd.bg_offset <= -1024) ? 0 : gd.bg_offset - g_data.delta_time * 200.0f;
+	if (!g_data.game_paused)
+		gd.bg_offset = (gd.bg_offset <= -1024) ? 0 : gd.bg_offset - g_data.delta_time * 200.0f;
 	SDL_FillRect(gd.screen, NULL, 0x000000);
 	SDL_Rect pos;
 	pos.x = gd.bg_offset;

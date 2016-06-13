@@ -12,6 +12,7 @@ void update_fps()
 
 int init_game()
 {
+	g_data.game_paused = 0;
 	g_data.game_ended = 0;
 	spawn_player();
 	spawn_enemy(220.0f);
@@ -23,8 +24,13 @@ int init_game()
 
 void tick_game()
 {
+	if (g_data.game_paused)
+		return;
 	if (g_data.is_dead && g_data.last_time - g_data.death_time >= 2.f * CLOCKS_PER_SEC)
-		spawn_player();
+	{
+		clean_quit_game();
+		init_game();
+	}
 	if (g_data.last_time - g_data.destroyer_time >= 30.f * CLOCKS_PER_SEC)
 	{
 		g_data.destroyer_time = g_data.last_time;
@@ -40,5 +46,6 @@ void clean_quit_game()
 	{
 		remove_go(&g_data.go_list);
 	}
+	g_data.lives = 0;
 }
 

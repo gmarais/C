@@ -91,10 +91,12 @@ typedef struct lst
 struct game_data
 {
 	lst_t *go_list;
+	float pause_time;
 	float last_time;
 	float delta_time;
 	float fps;
 	short int game_ended;
+	short int game_paused;
 	int score;
 	go_t *player;
 	go_t **lives;

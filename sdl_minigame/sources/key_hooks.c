@@ -42,6 +42,9 @@ int key_hooks()
         else if (event.type == SDL_KEYUP && event.key.keysym.scancode == 113 && move_x < 0)
 			move_x = 0.0f;
 
+        if (event.type == SDL_KEYDOWN && event.key.keysym.scancode == 33)
+			toggle_pause();
+
         if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.scancode == 9 && is_windowed))
 			return 1.0f;
 		else if (event.type == SDL_KEYDOWN && (event.key.keysym.scancode == 9 || event.key.keysym.scancode == 95) && !is_windowed)

@@ -18,7 +18,7 @@ void spawn_player()
 	g_data.player->animator = 0;
 	g_data.player->collider = new_collider();
 	g_data.player->collider->size.x = 62;
-	g_data.player->collider->size.y = 70;
+	g_data.player->collider->size.y = 32;
 	g_data.player->collider->damage = 10;
 	g_data.player->ai_handler = 0;
 	vector2 w_pos;
