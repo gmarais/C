@@ -22,7 +22,7 @@ void spawn_player()
 	g_data.player->collider->damage = 10;
 	g_data.player->ai_handler = 0;
 	vector2 w_pos;
-	w_pos.x = 80.0f;
+	w_pos.x = 30.0f;
 	w_pos.y = 0.0f;
 	g_data.player->weapon = new_base_weapon(w_pos);
 	g_data.player->weapon->fire_interval = 0.2f * CLOCKS_PER_SEC;

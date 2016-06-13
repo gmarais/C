@@ -10,14 +10,14 @@ typedef struct graphic_data
 {
 	SDL_Surface *screen;
 	SDL_Surface *bg_img;
+	SDL_Surface *icon_img;
 	SDL_Surface *img[IMG_NBR];
 	TTF_Font *police;
-	int bg_offset;
+	float bg_offset;
 } graphic_data_t;
 
 extern graphic_data_t gd;
 
-int load_bg();
 int load_images();
 void draw();
 void draw_bg();

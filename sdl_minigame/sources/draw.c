@@ -64,9 +64,9 @@ void draw()
 
 	SDL_Flip(gd.screen);
 
-    if ( SDL_MUSTLOCK(gd.screen) )
+	if ( SDL_MUSTLOCK(gd.screen) )
 	{
-        SDL_UnlockSurface(gd.screen);
-    }
+		SDL_UnlockSurface(gd.screen);
+	}
 }
 

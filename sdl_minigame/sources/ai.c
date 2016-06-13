@@ -31,7 +31,7 @@ ai_handler_t *new_enemy_ai()
 {
 	ai_handler_t *handler = new_ai_handler();
 	handler->last_move_order = g_data.last_time;
-	handler->move_order_interval = 1000000.0f;
+	handler->move_order_interval = 1.0f * CLOCKS_PER_SEC;
 	handler->ai_tick = &enemy_ai_tick;
 	return handler;
 }

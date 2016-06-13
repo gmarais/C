@@ -1,6 +1,22 @@
 #include <graphic.h>
 
-int load_bg()
+static load_icon()
+{
+	SDL_Surface* loadedImage;
+	Uint32 color_key;
+	loadedImage = SDL_LoadBMP("img/icon.bmp");
+	if (loadedImage == 0)
+		return -1;
+	gd.icon_img = SDL_DisplayFormat(loadedImage);
+	SDL_FreeSurface(loadedImage);
+	loadedImage = NULL;
+	if (gd.icon_img == 0)
+		return -1;
+	color_key = SDL_MapRGB(gd.icon_img->format, 0, 0, 0);
+	SDL_SetColorKey(gd.icon_img, SDL_SRCCOLORKEY, color_key);
+}
+
+static load_bg()
 {
 	SDL_Surface* loadedImage;
 	loadedImage = SDL_LoadBMP("img/bg.bmp");
@@ -10,7 +26,7 @@ int load_bg()
 	SDL_FreeSurface(loadedImage);
 	if (gd.bg_img == 0)
 		return -1;
-	return 0;
+	return load_icon();
 }
 
 int load_images()
