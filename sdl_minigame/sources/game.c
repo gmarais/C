@@ -31,7 +31,7 @@ void tick_game()
 		clean_quit_game();
 		init_game();
 	}
-	if (g_data.last_time - g_data.destroyer_time >= 30.f * CLOCKS_PER_SEC)
+	if (g_data.score >= 1000 && g_data.last_time - g_data.destroyer_time >= 30.f * CLOCKS_PER_SEC)
 	{
 		g_data.destroyer_time = g_data.last_time;
 		spawn_destroyer(rand() % 640);
