@@ -22,7 +22,6 @@ void delete_shader(shader_t *shader)
 		glDeleteProgram(shader->id_program);
 }
 
-// https://open.gl/drawing <- a voir
 int load_shader(shader_t *shader)
 {
 	GLint link_status;

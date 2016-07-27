@@ -18,7 +18,7 @@ static void get_inputs_rotations(SDL_Event e)
 
 static void get_inputs_translations(SDL_Event e)
 {
-	if (e.key.keysym.sym == SDLK_d)
+	if (e.key.keysym.sym == SDLK_q)
 		g_env.trans[0] = g_env.trans[0] < 1 ? g_env.trans[0] + 1 : 1;
 	else if (e.key.keysym.sym == SDLK_a)
 		g_env.trans[0] = g_env.trans[0] > -1 ? g_env.trans[0] - 1 : -1;
@@ -26,7 +26,7 @@ static void get_inputs_translations(SDL_Event e)
 		g_env.trans[1] = g_env.trans[1] < 1 ? g_env.trans[1] + 1 : 1;
 	else if (e.key.keysym.sym == SDLK_s)
 		g_env.trans[1] = g_env.trans[1] > -1 ? g_env.trans[1] - 1 : -1;
-	else if (e.key.keysym.sym == SDLK_q)
+	else if (e.key.keysym.sym == SDLK_d)
 		g_env.trans[2] = g_env.trans[2] < 1 ? g_env.trans[2] + 1 : 1;
 	else if (e.key.keysym.sym == SDLK_e)
 		g_env.trans[2] = g_env.trans[2] > -1 ? g_env.trans[2] - 1 : -1;

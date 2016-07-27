@@ -53,30 +53,43 @@ static void add_face_tab_lst(t_list **lst, char **words, int words_len)
 	}
 }
 
-t_obj load_obj(int fd)
+int		load_obj(t_obj *obj, int fd)
 {
-	t_obj obj;
 	char **words;
 	int words_len;
 
-	obj.v = 0;
-	obj.color = 0;
-	obj.vn = 0;
-	obj.vt = 0;
-	obj.f = 0;
+	obj->v = 0;
+	obj->color = 0;
+	obj->vn = 0;
+	obj->vt = 0;
+	obj->f = 0;
 	while ((words_len = get_next_words(&words, fd)) > 0)
 	{
 		if (words_len >= 4 && ft_strcmp(words[0], "v") == 0)
-			add_float_tab_lst(&obj.v, words, 3, words_len);
+			add_float_tab_lst(&obj->v, words, 3, words_len);
 		if (words_len >= 4 && ft_strcmp(words[0], "color") == 0)
-			add_float_tab_lst(&obj.color, words, 4, words_len);
+			add_float_tab_lst(&obj->color, words, 4, words_len);
 		if (words_len >= 4 && ft_strcmp(words[0], "vn") == 0)
-			add_float_tab_lst(&obj.vn, words, 3, words_len);
+			add_float_tab_lst(&obj->vn, words, 3, words_len);
 		if (words_len >= 3 && ft_strcmp(words[0], "vt") == 0)
-			add_float_tab_lst(&obj.vt, words, 2, words_len);
+			add_float_tab_lst(&obj->vt, words, 2, words_len);
 		if (words_len >= 4 && ft_strcmp(words[0], "f") == 0)
-			add_face_tab_lst(&obj.f, words, words_len);
+			add_face_tab_lst(&obj->f, words, words_len);
 		clean_words_tab(words, words_len);
 	}
-	return obj;
+	return 0;
+}
+
+void delete_obj(t_obj *obj)
+{
+	if (obj->v)
+		ft_lstdel(&obj->v, NULL);
+	if (obj->color)
+		ft_lstdel(&obj->color, NULL);
+	if (obj->vn)
+		ft_lstdel(&obj->vn, NULL);
+	if (obj->vt)
+		ft_lstdel(&obj->vt, NULL);
+	if (obj->f)
+		ft_lstdel(&obj->f, NULL);
 }

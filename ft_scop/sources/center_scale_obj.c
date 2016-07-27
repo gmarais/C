@@ -1,14 +1,31 @@
 #include "model.h"
 
+static void initiate_min_max(float (*min)[3], float (*max)[3], float (*abs_min_max)[2], t_list *tmp)
+{
+	int		i;
+
+	i = -1;
+	(*abs_min_max)[0] = OBJ_V(tmp)[0];
+	(*abs_min_max)[1] = OBJ_V(tmp)[0];
+	while (++i < 3)
+	{
+		(*max)[i] = OBJ_V(tmp)[i];
+		(*min)[i] = OBJ_V(tmp)[i];
+		if (OBJ_V(tmp)[i] < (*abs_min_max)[0])
+			(*abs_min_max)[0] = OBJ_V(tmp)[i];
+		if (OBJ_V(tmp)[i] > (*abs_min_max)[1])
+			(*abs_min_max)[1] = OBJ_V(tmp)[i];
+	}
+}
+
 static void set_min_and_max(float (*min)[3], float (*max)[3], float (*abs_min_max)[2], t_obj *obj)
 {
 	int i;
 	t_list *tmp;
 
-	ft_bzero(*min, sizeof(float[3]));
-	ft_bzero(*max, sizeof(float[3]));
-	ft_bzero(*abs_min_max, sizeof(float[2]));
 	tmp = obj->v;
+	if (tmp)
+		initiate_min_max(min, max, abs_min_max, tmp);
 	while (tmp)
 	{
 		i = -1;

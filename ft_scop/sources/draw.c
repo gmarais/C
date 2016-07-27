@@ -3,26 +3,26 @@
 static void update_model_view(double delta_time)
 {
 	if (g_env.rots[0] != 0)
-		rotate_x(&(g_env.mv), 0.0002 * delta_time * (float)(g_env.rots[0]));
+		rotate_x(&(g_env.mv), delta_time * (float)(g_env.rots[0]));
 	if (g_env.rots[1] != 0)
-		rotate_y(&(g_env.mv), 0.0002 * delta_time * (float)(g_env.rots[1]));
+		rotate_y(&(g_env.mv), delta_time * (float)(g_env.rots[1]));
 	if (g_env.rots[2] != 0)
-		rotate_z(&(g_env.mv), 0.0002 * delta_time * (float)(g_env.rots[2]));
+		rotate_z(&(g_env.mv), delta_time * (float)(g_env.rots[2]));
 	if (g_env.trans[0] || g_env.trans[1] || g_env.trans[2])
 	{
 		translate_matrix(&(g_env.mv)
-			, 0.0001 * delta_time * (float)(g_env.trans[0])
-			, 0.0001 * delta_time * (float)(g_env.trans[1])
-			, 0.0001 * delta_time * (float)(g_env.trans[2]));
+			, delta_time * (float)(g_env.trans[0])
+			, delta_time * (float)(g_env.trans[1])
+			, delta_time * (float)(g_env.trans[2]));
 	}
 }
 
 static void update_texture_color_ratio(double delta_time)
 {
 	if (!g_env.text_is_on && g_env.col_to_text > 0)
-		g_env.col_to_text -= 0.0001 * delta_time;
+		g_env.col_to_text -= delta_time;
 	else if (g_env.text_is_on && g_env.col_to_text < 1)
-		g_env.col_to_text += 0.0001 * delta_time;
+		g_env.col_to_text += delta_time;
 	if (g_env.col_to_text > 1)
 		g_env.col_to_text = 1;
 	else if (g_env.col_to_text < 0)

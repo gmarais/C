@@ -7,10 +7,8 @@
 t_model *new_model(char *obj_filename)
 {
 	t_model *model;
-	model = (t_model *)malloc(sizeof(t_model));
+	model = (t_model *)ft_memalloc(sizeof(t_model));
 	model->obj_filename = obj_filename;
-	model->v_size = 0;
-	model->vertices = 0;
 	return model;
 }
 
@@ -67,7 +65,7 @@ static void set_model_uvs(t_model *model)
 	}
 }
 
-void load_model(t_model *model)
+int load_model(t_model *model)
 {
 	int	fd;
 	t_obj obj;
@@ -75,23 +73,21 @@ void load_model(t_model *model)
 
 	if ((fd = open(model->obj_filename, O_RDONLY)) <= 0)
 	{
+		close(fd);
 		ft_putendl_fd("Error opening obj file.", 2);
-		return;
+		return - 1;
 	}
-	obj = load_obj(fd);
-	center_and_scale_obj(&obj);
+	load_obj(&obj, fd);
 	close(fd);
+	center_and_scale_obj(&obj);
 	iterator = obj.f;
 	while (iterator != 0)
 	{
 		add_face_to_model(obj, OBJ_F(iterator), model);
 		iterator = iterator->next;
 	}
-	ft_lstdel(&obj.v, NULL);
-	ft_lstdel(&obj.color, NULL);
-	ft_lstdel(&obj.vn, NULL);
-	ft_lstdel(&obj.vt, NULL);
-	ft_lstdel(&obj.f, NULL);
+	delete_obj(&obj);
 	set_model_positions_colors(model);
 	set_model_uvs(model);
+	return 0;
 }

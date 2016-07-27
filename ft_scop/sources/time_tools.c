@@ -6,7 +6,7 @@ double update_delta_time()
 	double current_time;
 	double delta_time;
 
-	current_time = clock();
+	current_time = clock() / (double)CLOCKS_PER_SEC;
 	delta_time = current_time - last_time;
 	last_time = current_time;
 	return delta_time;

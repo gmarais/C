@@ -2,6 +2,7 @@
 #define _MODEL_
 
 #include "libft.h"
+#include <GL/glew.h>
 #define SIZE_XYZ 3
 #define SIZE_RGBA 4
 #define SIZE_UV 2
@@ -69,19 +70,20 @@ typedef struct model
 	float *positions;
 	float *colors;
 	float *uvs;
-	unsigned int vaoid;
-	unsigned int positions_vboid;
-	unsigned int colors_vboid;
-	unsigned int uvs_vboid;
+	GLuint vaoid;
+	GLuint positions_vboid;
+	GLuint colors_vboid;
+	GLuint uvs_vboid;
 } t_model;
 
-t_model *new_model(char *obj_filename);
-void load_model(t_model *model);
-void delete_model(t_model *model);
-int get_next_words(char ***words, int fd);
-void clean_words_tab(char **words, int words_len);
-t_obj load_obj(int fd);
-void add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model);
-void center_and_scale_obj(t_obj *obj);
+t_model	*new_model(char *obj_filename);
+int		load_model(t_model *model);
+void	delete_model(t_model *model);
+int		get_next_words(char ***words, int fd);
+void	clean_words_tab(char **words, int words_len);
+int		load_obj(t_obj *obj, int fd);
+void	delete_obj(t_obj *obj);
+void	add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model);
+void	center_and_scale_obj(t_obj *obj);
 
 #endif

@@ -21,7 +21,7 @@ static void init_shaders(char *obj_file, char *img_file)
 {
 	g_env.mdl = new_model(obj_file);
 	load_model(g_env.mdl);
-	glGenVertexArrays(1, (GLuint *)&(g_env.mdl->vaoid));
+	glGenVertexArrays(1, &(g_env.mdl->vaoid));
 	glBindVertexArray(g_env.mdl->vaoid);
 	add_attrib(0, 3, g_env.mdl->positions, &g_env.mdl->positions_vboid);
 	add_attrib(1, 4, g_env.mdl->colors, &g_env.mdl->colors_vboid);
@@ -76,6 +76,7 @@ int create_window(char *obj_file, char *img_file)
 	g_env.context = SDL_GL_CreateContext(g_env.w);
 	if(g_env.context == 0)
 		return process_error("Context for OpenGL not created");
+	glewExperimental = GL_TRUE;
 	if(glewInit() != GLEW_OK)
 		return process_error("Erreur d'initialisation de GLEW");
 	ft_putendl((char *)glGetString(GL_RENDERER));
