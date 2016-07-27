@@ -189,7 +189,7 @@ void debug_vector3(const float v[3])
 	ft_putstr("\n\n");
 }
 
-static mat4_t look_at_result_line(mat4_t *r
+static void look_at_result_line(mat4_t *r
 	, int *i
 	, const float eye[3]
 	, float v[3])

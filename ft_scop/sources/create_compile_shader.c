@@ -26,7 +26,7 @@ static int create_shader(GLuint *id_shader,	GLenum type)
 	return 0;
 }
 
-static get_source_code(char **content, GLuint *id_shader, char *source_file)
+static int get_source_code(char **content, GLuint *id_shader, char *source_file)
 {
 	*content = (GLchar *)file_get_content(source_file);
 	if (*content == NULL)
@@ -56,14 +56,14 @@ static int compile_shader(GLuint id_shader, const GLchar ** source_content)
 
 int create_compile_shader(shader_t *shader)
 {
-	if (create_shader(&shader->id_frag, GL_FRAGMENT_SHADER)
-		|| get_source_code(&shader->frag_src_content, &shader->id_frag, shader->frag_src))
-		return -1;
 	if (create_shader(&shader->id_vert, GL_VERTEX_SHADER)
 		|| get_source_code(&shader->vert_src_content, &shader->id_vert, shader->vert_src))
 		return -1;
-	if (compile_shader(shader->id_frag, (const GLchar **)(&shader->frag_src_content))
-		|| compile_shader(shader->id_vert, (const GLchar **)(&shader->vert_src_content)))
+	if (create_shader(&shader->id_frag, GL_FRAGMENT_SHADER)
+		|| get_source_code(&shader->frag_src_content, &shader->id_frag, shader->frag_src))
+		return -1;
+	if (compile_shader(shader->id_vert, (const GLchar **)(&shader->vert_src_content))
+		||compile_shader(shader->id_frag, (const GLchar **)(&shader->frag_src_content)))
 		return -1;
 	return 0;
 }

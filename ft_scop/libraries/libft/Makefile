@@ -62,14 +62,14 @@ ifeq ($(OS_DETECTED), Darwin)
 # Commands
 	RM=rm -rf
 	RMDIR=rm -rf
-	ECHO=echo -n
+	ECHO=echo
 # Feedback
-	RED=\e[31m
-	GREEN=\e[32m
-	CYAN=\e[36m
-	ENDL=\n\e[0m
-	ENDC=\e[0m
-	COMPILED=•
+	RED=""
+	GREEN=""
+	CYAN=""
+	ENDL=""
+	ENDC=""
+	COMPILED="$@"
 	REDIRECT_ERROR=
 endif
 #---------------------------------------------------------------# Compilation #

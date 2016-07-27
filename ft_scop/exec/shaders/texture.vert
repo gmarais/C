@@ -1,13 +1,12 @@
 // Version du GLSL
 
-#version 150 core
+#version 410 core
 
-
-// Entr�es
+// Entrees
 
 in vec3 in_Vertex;
 in vec4 in_Color;
-in vec2 in_TexCoord0;
+in vec2 in_TexCoord;
 
 
 // Uniform
@@ -36,5 +35,5 @@ void main()
 
     // Envoi des coordonn�es de texture au Fragment Shader
 
-    coordTexture = in_TexCoord0;
+    coordTexture = in_TexCoord;
 }

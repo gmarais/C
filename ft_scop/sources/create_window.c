@@ -7,21 +7,30 @@ static int process_error(char *msg)
 	return -1;
 }
 
+void add_attrib(int att_id, int length, float *data, unsigned int *vboid)
+{
+	glGenBuffers(1, vboid);
+	glBindBuffer(GL_ARRAY_BUFFER, *vboid);
+	glBufferData(GL_ARRAY_BUFFER, g_env.mdl->v_size * length * sizeof(GLfloat),
+			data, GL_STATIC_DRAW);
+	glVertexAttribPointer(att_id, length, GL_FLOAT, GL_FALSE, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 static void init_shaders(char *obj_file, char *img_file)
 {
-	char *path;
-
-	path = ft_strjoin(OBJ_PATH, obj_file);
-	g_env.mdl = new_model(path);
+	g_env.mdl = new_model(obj_file);
 	load_model(g_env.mdl);
-	free(path);
-	path = ft_strjoin(IMG_PATH, img_file);
-	g_env.texture = new_texture(path);
+	glGenVertexArrays(1, (GLuint *)&(g_env.mdl->vaoid));
+	glBindVertexArray(g_env.mdl->vaoid);
+	add_attrib(0, 3, g_env.mdl->positions, &g_env.mdl->positions_vboid);
+	add_attrib(1, 4, g_env.mdl->colors, &g_env.mdl->colors_vboid);
+	add_attrib(2, 2, g_env.mdl->uvs, &g_env.mdl->uvs_vboid);
+	g_env.texture = new_texture(img_file);
 	if (load_texture(g_env.texture))
 	{
 		ft_putendl_fd("Failed to load texture...", 2);
 	}
-	free(path);
 	g_env.shader = new_shader("shaders/texture.vert", "shaders/texture.frag");
 	if (load_shader(g_env.shader))
 	{
@@ -35,8 +44,9 @@ static void init_shaders(char *obj_file, char *img_file)
 
 static void set_sdl_gl_attributes()
 {
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 }
@@ -68,8 +78,11 @@ int create_window(char *obj_file, char *img_file)
 		return process_error("Context for OpenGL not created");
 	if(glewInit() != GLEW_OK)
 		return process_error("Erreur d'initialisation de GLEW");
+	ft_putendl((char *)glGetString(GL_RENDERER));
+	ft_putendl((char *)glGetString(GL_VERSION));
+	ft_putendl((char *)glGetString( GL_SHADING_LANGUAGE_VERSION ));
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(0.5, 0.5, 0.5, 1);
+	glClearColor(0.2, 0.2, 0.3, 1);
 	init_shaders(obj_file, img_file);
 	init_model_view();
 	return 0;

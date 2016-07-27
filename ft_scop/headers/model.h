@@ -6,10 +6,8 @@
 #define SIZE_RGBA 4
 #define SIZE_UV 2
 #define MAX_OBJ_SCALE 8.0f
-#define OBJ_PATH "obj/"
-#define BASE_OBJ "42.obj"
-#define IMG_PATH "img/"
-#define BASE_IMG "ruler_grid.bmp"
+#define BASE_OBJ "obj/42.obj"
+#define BASE_IMG "img/ruler_grid.bmp"
 
 enum e_xyz
 {
@@ -71,6 +69,10 @@ typedef struct model
 	float *positions;
 	float *colors;
 	float *uvs;
+	unsigned int vaoid;
+	unsigned int positions_vboid;
+	unsigned int colors_vboid;
+	unsigned int uvs_vboid;
 } t_model;
 
 t_model *new_model(char *obj_filename);
@@ -81,7 +83,5 @@ void clean_words_tab(char **words, int words_len);
 t_obj load_obj(int fd);
 void add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model);
 void center_and_scale_obj(t_obj *obj);
-
-
 
 #endif

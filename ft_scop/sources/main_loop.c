@@ -32,8 +32,11 @@ static void get_inputs_translations(SDL_Event e)
 		g_env.trans[2] = g_env.trans[2] > -1 ? g_env.trans[2] - 1 : -1;
 }
 
-static int process_inputs(SDL_Event e)
+static int process_inputs()
 {
+	SDL_Event e;
+
+	SDL_PollEvent(&e);
 	if(e.window.event == SDL_WINDOWEVENT_CLOSE)
 		return 1;
 	if (e.type != SDL_KEYDOWN)
@@ -49,17 +52,17 @@ static int process_inputs(SDL_Event e)
 
 void main_loop()
 {
-	SDL_Event e;
 	short int exited;
 
 	exited = 0;
 	while (!exited)
 	{
-		SDL_PollEvent(&e);
-		exited = process_inputs(e);
+		exited = process_inputs();
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		glUseProgram(g_env.shader->id_program);
+		glBindVertexArray(g_env.mdl->vaoid);
 		draw();
+		glBindVertexArray(0);
 		glUseProgram(0);
 		SDL_GL_SwapWindow(g_env.w);
 	}

@@ -63,6 +63,38 @@ CLEAN_DYNAMICS=del /f $(EXEC_DIR)\glew32.dll && \
 	del /f $(EXEC_DIR)\glew32mx.dll && \
 	del /f $(EXEC_DIR)\SDL2.dll
 endif
+#------------------------------------------------------------------# Mac OS X #
+ifeq ($(OS_DETECTED), Darwin)
+# Compiler
+CC=gcc
+# Flags
+BASE_CFLAGS=
+ifeq ($(DEBUG),yes)
+	CFLAGS=$(BASE_CFLAGS) -g
+else
+	CFLAGS=$(BASE_CFLAGS)
+endif
+# Exec
+EXEC=$(EXEC_DIR)/$(PROG_NAME).x86
+# Libraries Directories
+	GLEW_LIB_DIR=/nfs/2013/g/gmarais/.brew/Cellar/glew/2.0.0
+	SDL2_LIB_DIR=/nfs/2013/g/gmarais/.brew/Cellar/sdl2/2.0.4
+# Includes
+	INCLUDES=-I$(INC_DIR) -I$(LIB_DIR)/libft/include/ -I$(SDL2_LIB_DIR)/include -I$(GLEW_LIB_DIR)/include
+# Links
+	LDFLAGS=-L$(LIB_DIR)/libft/lib -lft -L$(SDL2_LIB_DIR)/lib -lSDL2main -lSDL2 -framework OpenGL -L$(GLEW_LIB_DIR)/lib -lGLEW
+# Commands
+	RM=rm -rf
+	RMDIR=rm -rf
+	ECHO=echo
+# Feedback
+	RED=""
+	GREEN=""
+	CYAN=""
+	ENDL=""
+	ENDC=""
+	COMPILED="$@"
+endif
 #---------------------------------------------------------------------# Linux #
 ifeq ($(OS_DETECTED), Linux)
 # Compiler
@@ -93,40 +125,6 @@ EXEC=$(EXEC_DIR)\$(PROG_NAME).x86
 	ENDL=\n\e[0m
 	ENDC=\e[0m
 	COMPILED=•
-# get dynamic libraries rule
-DYNAMICS=
-CLEAN_DYNAMICS=
-endif
-#------------------------------------------------------------------# Mac OS X #
-ifeq ($(OS_DETECTED), Darwin)
-# Compiler
-CC=gcc
-# Flags
-BASE_CFLAGS=
-ifeq ($(DEBUG),yes)
-	CFLAGS=$(BASE_CFLAGS) -g
-else
-	CFLAGS=$(BASE_CFLAGS)
-endif
-# Exec
-EXEC=$(EXEC_DIR)\$(PROG_NAME).x86
-# Directories
-	OS_LIB_DIR=$(LIB_DIR)/OSX
-# Includes
-	INCLUDES=-I$(INC_DIR)
-# Links
-	LDFLAGS=
-# Commands
-	RM=rm -rf
-	RMDIR=rm -rf
-	ECHO=echo -n
-# Feedback
-	RED=""
-	GREEN=""
-	CYAN=""
-	ENDL="\n"
-	ENDC=""
-	COMPILED="•"
 # get dynamic libraries rule
 DYNAMICS=
 CLEAN_DYNAMICS=
@@ -177,7 +175,7 @@ fclean: fclnlib
 	@$(ECHO) "$(RED)Removing executable$(ENDL)"
 	@$(RM) $(EXEC)
 	@$(CLEAN_DYNAMICS)
-re: fclean
+re: fclean lib
 	@make --no-print-directory $(EXEC)
 #libft
 lib:

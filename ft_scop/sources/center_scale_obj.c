@@ -5,6 +5,7 @@ static void set_min_and_max(float (*min)[3], float (*max)[3], float (*abs_min_ma
 	int i;
 	t_list *tmp;
 
+	ft_bzero(*min, sizeof(float[3]));
 	ft_bzero(*max, sizeof(float[3]));
 	ft_bzero(*abs_min_max, sizeof(float[2]));
 	tmp = obj->v;
@@ -26,7 +27,7 @@ static void set_min_and_max(float (*min)[3], float (*max)[3], float (*abs_min_ma
 	}
 }
 
-static void center_obj(t_obj *obj, float (*min)[3], float (*max)[3])
+static void center_obj(t_obj *obj, float min[3], float max[3])
 {
 	float offset[3];
 	float abs_middle[3];
@@ -36,8 +37,8 @@ static void center_obj(t_obj *obj, float (*min)[3], float (*max)[3])
 	i = -1;
 	while (++i < 3)
 	{
-		abs_middle[i] = (ft_absf((*max)[i]) + ft_absf((*min)[i])) * 0.5f;
-		offset[i] = abs_middle[i] - (*max)[i];
+		abs_middle[i] = (ft_absf(max[i]) + ft_absf(min[i])) * 0.5f;
+		offset[i] = abs_middle[i] - max[i];
 	}
 	tmp = obj->v;
 	while (tmp)
@@ -81,6 +82,6 @@ void center_and_scale_obj(t_obj *obj)
 	t_list *tmp;
 
 	set_min_and_max(&min, &max, &abs_min_max, obj);
-	center_obj(obj, &min, &max);
+	center_obj(obj, min, max);
 	scale_obj(obj, &abs_min_max, MAX_OBJ_SCALE);
 }

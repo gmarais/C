@@ -22,6 +22,7 @@ void delete_shader(shader_t *shader)
 		glDeleteProgram(shader->id_program);
 }
 
+// https://open.gl/drawing <- a voir
 int load_shader(shader_t *shader)
 {
 	GLint link_status;
@@ -34,7 +35,7 @@ int load_shader(shader_t *shader)
 	glAttachShader(shader->id_program, shader->id_frag);
 	glBindAttribLocation(shader->id_program, 0, "in_Vertex");
 	glBindAttribLocation(shader->id_program, 1, "in_Color");
-	glBindAttribLocation(shader->id_program, 2, "in_TexCoord0");
+	glBindAttribLocation(shader->id_program, 2, "in_TexCoord");
 	glLinkProgram(shader->id_program);
 	link_status = 0;
 	glGetProgramiv(shader->id_program, GL_LINK_STATUS, &link_status);
@@ -44,5 +45,9 @@ int load_shader(shader_t *shader)
 		glDeleteProgram(shader->id_program);
 		return -1;
 	}
+	shader->u_mdlview = glGetUniformLocation(shader->id_program, "modelview");
+	shader->u_proj = glGetUniformLocation(shader->id_program, "projection");
+	shader->u_coltotext = glGetUniformLocation(shader->id_program
+		, "coltotext");
 	return 0;
 }

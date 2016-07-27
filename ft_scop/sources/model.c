@@ -1,6 +1,7 @@
 #include "model.h"
 #include "shader.h"
 #include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 
 t_model *new_model(char *obj_filename)
