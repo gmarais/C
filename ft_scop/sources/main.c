@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "main.h"
+#include "model.h"
 
-t_env	g_env;
+t_env		g_env;
+enum e_rfcg	rfc_mode;
 
 static void	clean_quit(void)
 {
@@ -41,13 +43,40 @@ static void	clean_quit(void)
 	SDL_Quit();
 }
 
+static void	parse_arguments(int ac
+	, char **av
+	, char **obj_file
+	, char **img_file)
+{
+	int i;
+
+	i = 0;
+	rfc_mode = e_rfcg_greyscale;
+	*obj_file = BASE_OBJ;
+	*img_file = BASE_IMG;
+	while (++i < ac)
+	{
+		if (!ft_strcmp(av[i], "-c"))
+			rfc_mode = e_rfcg_colors;
+		else if (ft_strlen(av[i]) > 4)
+		{
+			if (!ft_strcmp((char *)(av[i] + ft_strlen(av[i]) - 4), ".obj"))
+			{
+				*obj_file = av[i];
+			}
+			if (!ft_strcmp((char *)(av[i] + ft_strlen(av[i]) - 4), ".bmp"))
+				*img_file = av[i];
+		}
+	}
+}
+
 int			main(int ac, char **av)
 {
 	char	*obj_file;
 	char	*img_file;
 
-	obj_file = ac > 1 ? av[1] : BASE_OBJ;
-	img_file = ac > 2 ? av[2] : BASE_IMG;
+	parse_arguments(ac, av, &obj_file, &img_file);
+	update_delta_time();
 	if (create_window(obj_file, img_file) == 0)
 		main_loop();
 	clean_quit();

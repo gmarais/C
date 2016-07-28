@@ -62,7 +62,7 @@ static int	process_inputs(void)
 	return (0);
 }
 
-void	main_loop(void)
+void		main_loop(void)
 {
 	short int	exited;
 	const float	eye[3] = {5, 5, 5};
@@ -71,7 +71,6 @@ void	main_loop(void)
 
 	g_env.mv = look_at(eye, center, up);
 	exited = 0;
-	update_delta_time();
 	while (!exited)
 	{
 		exited = process_inputs();

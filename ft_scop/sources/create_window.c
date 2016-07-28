@@ -35,7 +35,7 @@ static int	init_shaders(char *obj_file, char *img_file)
 {
 	g_env.mdl = new_model(obj_file);
 	if (load_model(g_env.mdl))
-		return (process_error("Error while opening or loading obj file."));
+		return (process_error("Failed to open or load obj file."));
 	glGenVertexArrays(1, &(g_env.mdl->vaoid));
 	glBindVertexArray(g_env.mdl->vaoid);
 	add_attrib(0, 3, g_env.mdl->positions, &g_env.mdl->positions_vboid);
@@ -43,7 +43,7 @@ static int	init_shaders(char *obj_file, char *img_file)
 	add_attrib(2, 2, g_env.mdl->uvs, &g_env.mdl->uvs_vboid);
 	g_env.texture = new_texture(img_file);
 	if (load_texture(g_env.texture))
-		ft_putendl_fd("Failed to load texture...", 2);
+		process_error("Failed to load texture...");
 	g_env.shader = new_shader("shaders/texture.vert", "shaders/texture.frag");
 	if (load_shader(g_env.shader))
 		return (process_error("Failed to load shader..."));
