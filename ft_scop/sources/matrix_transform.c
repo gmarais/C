@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix_transform.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "math_tools.h"
 
-void scale_matrix(mat4_t* m, float x, float y, float z)
+void	scale_matrix(t_mat4 *m, float x, float y, float z)
 {
-	mat4_t scale;
-	mat4_t mult_res;
+	t_mat4 scale;
+	t_mat4 mult_res;
 
-	scale = IDENTITY_MATRIX;
+	scale = g_identity_matrix;
 	scale.val[0] = x;
 	scale.val[5] = y;
 	scale.val[10] = z;
@@ -14,12 +26,12 @@ void scale_matrix(mat4_t* m, float x, float y, float z)
 	ft_memcpy(m->val, mult_res.val, sizeof(m->val));
 }
 
-void translate_matrix(mat4_t* m, float x, float y, float z)
+void	translate_matrix(t_mat4 *m, float x, float y, float z)
 {
-	mat4_t translation;
-	mat4_t mult_res;
+	t_mat4	translation;
+	t_mat4	mult_res;
 
-	translation = IDENTITY_MATRIX;
+	translation = g_identity_matrix;
 	translation.val[12] = x;
 	translation.val[13] = y;
 	translation.val[14] = z;
@@ -27,16 +39,16 @@ void translate_matrix(mat4_t* m, float x, float y, float z)
 	ft_memcpy(m->val, mult_res.val, sizeof(m->val));
 }
 
-void rotate_x(mat4_t* m, float angle)
+void	rotate_x(t_mat4 *m, float angle)
 {
-	mat4_t rotation;
-	mat4_t mult_res;
-	float sine;
-	float cosine;
+	t_mat4	rotation;
+	t_mat4	mult_res;
+	float	sine;
+	float	cosine;
 
 	sine = (float)sin(angle);
 	cosine = (float)cos(angle);
-	rotation = IDENTITY_MATRIX;
+	rotation = g_identity_matrix;
 	rotation.val[5] = cosine;
 	rotation.val[6] = -sine;
 	rotation.val[9] = sine;
@@ -45,16 +57,16 @@ void rotate_x(mat4_t* m, float angle)
 	ft_memcpy(m->val, mult_res.val, sizeof(m->val));
 }
 
-void rotate_y(mat4_t* m, float angle)
+void	rotate_y(t_mat4 *m, float angle)
 {
-	mat4_t rotation;
-	mat4_t mult_res;
-	float sine;
-	float cosine;
+	t_mat4	rotation;
+	t_mat4	mult_res;
+	float	sine;
+	float	cosine;
 
 	sine = (float)sin(angle);
 	cosine = (float)cos(angle);
-	rotation = IDENTITY_MATRIX;
+	rotation = g_identity_matrix;
 	rotation.val[0] = cosine;
 	rotation.val[2] = -sine;
 	rotation.val[8] = sine;
@@ -63,16 +75,16 @@ void rotate_y(mat4_t* m, float angle)
 	ft_memcpy(m->val, mult_res.val, sizeof(m->val));
 }
 
-void rotate_z(mat4_t* m, float angle)
+void	rotate_z(t_mat4 *m, float angle)
 {
-	mat4_t rotation;
-	mat4_t mult_res;
-	float sine;
-	float cosine;
+	t_mat4	rotation;
+	t_mat4	mult_res;
+	float	sine;
+	float	cosine;
 
 	sine = (float)sin(angle);
 	cosine = (float)cos(angle);
-	rotation = IDENTITY_MATRIX;
+	rotation = g_identity_matrix;
 	rotation.val[0] = cosine;
 	rotation.val[1] = -sine;
 	rotation.val[4] = sine;

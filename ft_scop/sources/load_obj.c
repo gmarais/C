@@ -1,6 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_obj.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "model.h"
 
-static void add_float_tab_lst(t_list **lst, char **words, int tab_size, int w_len)
+static void	add_float_tab_lst(t_list **lst
+	, char **words
+	, int tab_size
+	, int w_len)
 {
 	float	content[tab_size];
 	t_list	*tmp;
@@ -16,9 +31,9 @@ static void add_float_tab_lst(t_list **lst, char **words, int tab_size, int w_le
 	ft_lstadd_back(lst, tmp);
 }
 
-static void get_obj_vertex_indexes(char *word, int vertex[3])
+static void	get_obj_vertex_indexes(char *word, int vertex[3])
 {
-	char **indexes;
+	char	**indexes;
 
 	indexes = ft_strsplit(word, '/');
 	if (ft_strtablen(indexes) == 3)
@@ -35,7 +50,7 @@ static void get_obj_vertex_indexes(char *word, int vertex[3])
 	}
 }
 
-static void add_face_tab_lst(t_list **lst, char **words, int words_len)
+static void	add_face_tab_lst(t_list **lst, char **words, int words_len)
 {
 	int		face[3][3];
 	t_list	*tmp;
@@ -53,10 +68,10 @@ static void add_face_tab_lst(t_list **lst, char **words, int words_len)
 	}
 }
 
-int		load_obj(t_obj *obj, int fd)
+int			load_obj(t_obj *obj, int fd)
 {
-	char **words;
-	int words_len;
+	char	**words;
+	int		words_len;
 
 	ft_bzero(obj, sizeof(t_obj));
 	while ((words_len = get_next_words(&words, fd)) > 0)
@@ -74,11 +89,11 @@ int		load_obj(t_obj *obj, int fd)
 		clean_words_tab(words, words_len);
 	}
 	if (ft_lstcount(obj->v) == 0 || ft_lstcount(obj->f) == 0)
-		return -1;
-	return 0;
+		return (-1);
+	return (0);
 }
 
-void delete_obj(t_obj *obj)
+void		delete_obj(t_obj *obj)
 {
 	if (obj->v)
 		ft_lstdel(&obj->v, NULL);

@@ -17,17 +17,18 @@
 #include <fcntl.h>
 #include "libft.h"
 
-static char *realloc_content(char *content, ssize_t cont_length, ssize_t ret)
+static char	*realloc_content(char *content, ssize_t cont_length, ssize_t ret)
 {
-	ssize_t old_size;
-	ssize_t new_size;
+	ssize_t		old_size;
+	ssize_t		new_size;
+
 	old_size = cont_length * sizeof(char);
 	new_size = old_size + ret * sizeof(char);
 	content = (char *)ft_realloc(content, old_size, new_size);
-	return content;
+	return (content);
 }
 
-static void copybuf(char *content, char *buf, ssize_t *cont_length, ssize_t ret)
+static void	copybuf(char *content, char *buf, ssize_t *cont_length, ssize_t ret)
 {
 	ssize_t		i;
 
@@ -41,7 +42,7 @@ static void copybuf(char *content, char *buf, ssize_t *cont_length, ssize_t ret)
 	content[*cont_length] = 0;
 }
 
-char	*file_get_content(const char *path)
+char		*file_get_content(const char *path)
 {
 	char		*content;
 	ssize_t		cont_length;
@@ -50,16 +51,16 @@ char	*file_get_content(const char *path)
 	int			fd;
 
 	if ((fd = open(path, O_RDONLY)) <= 0)
-		return NULL;
+		return (NULL);
 	content = NULL;
 	cont_length = 0;
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		content = realloc_content(content, cont_length, ret);
 		if (content == NULL)
-			break;
+			break ;
 		copybuf(content, buf, &cont_length, ret);
 	}
 	close(fd);
-	return content;
+	return (content);
 }

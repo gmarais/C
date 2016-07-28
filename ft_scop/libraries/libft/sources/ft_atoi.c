@@ -28,7 +28,7 @@ int		ft_atoi(const char *str)
 		sign = (str[i] == '-') ? -sign : sign;
 		i++;
 	}
-	while (str[i] != '\0' && ft_isdigit (str[i]) != 0)
+	while (str[i] != '\0' && ft_isdigit(str[i]) != 0)
 	{
 		res = res * 10 + str[i] - '0';
 		i++;

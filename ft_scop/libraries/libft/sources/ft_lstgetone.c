@@ -14,14 +14,15 @@
 
 t_list	*ft_lstgetone(t_list *beginlst, int index)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	if (i > index)
-		return NULL;
+		return (NULL);
 	while (i < index && beginlst)
 	{
 		beginlst = beginlst->next;
 		i++;
 	}
-	return beginlst;
+	return (beginlst);
 }

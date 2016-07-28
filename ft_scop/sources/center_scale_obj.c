@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   center_scale_obj.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "model.h"
 
-static void initiate_min_max(float (*min)[3]
+static void	initiate_min_max(float (*min)[3]
 	, float (*max)[3]
 	, float (*abs_min_max)[2]
 	, t_list *tmp)
@@ -21,7 +33,7 @@ static void initiate_min_max(float (*min)[3]
 	}
 }
 
-static void set_min_and_max(float (*min)[3]
+static void	set_min_and_max(float (*min)[3]
 	, float (*max)[3]
 	, float (*abs_min_max)[2]
 	, t_obj *obj)
@@ -50,7 +62,7 @@ static void set_min_and_max(float (*min)[3]
 	}
 }
 
-static void center_obj(t_obj *obj, float min[3], float max[3])
+static void	center_obj(t_obj *obj, float min[3], float max[3])
 {
 	float	offset[3];
 	float	abs_middle[3];
@@ -75,7 +87,7 @@ static void center_obj(t_obj *obj, float min[3], float max[3])
 	}
 }
 
-static void scale_obj(t_obj *obj
+static void	scale_obj(t_obj *obj
 	, float (*abs_min_max)[2]
 	, float wanted_size)
 {
@@ -98,7 +110,7 @@ static void scale_obj(t_obj *obj
 	}
 }
 
-void center_and_scale_obj(t_obj *obj)
+void		center_and_scale_obj(t_obj *obj)
 {
 	float	min[3];
 	float	max[3];

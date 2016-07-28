@@ -26,10 +26,11 @@ static void	ft_ifbufin(char *buf, size_t i, char **line, char **result)
 
 static int	ft_copybuf(char **result, char *buf, size_t *i, size_t *j)
 {
-	size_t s;
-	*i = 0;
-	int char_size = sizeof(char);
+	size_t		s;
+	int			char_size;
 
+	*i = 0;
+	char_size = sizeof(char);
 	while (buf[*i] != '\n' && buf[*i] != '\0' && *i < BUFF_SIZE)
 	{
 		s = ft_strlen(*result) + 1;
@@ -63,7 +64,7 @@ int			get_next_line(int const fd, char **line)
 			return (-1);
 		i = (i == BUFF_SIZE) ? 0 : i;
 	}
-	ft_ifbufin(buf, i, line, & result);
+	ft_ifbufin(buf, i, line, &result);
 	if (ret == 0 && ft_strlen(buf) > 0)
 		buf[0] = '\0';
 	if ((ret > 0 && ret <= BUFF_SIZE) || (ret == 0 && ft_strlen(result) > 0))

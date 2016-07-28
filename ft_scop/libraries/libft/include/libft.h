@@ -9,19 +9,14 @@
 /*   Updated: 2014/03/23 18:53:46 by gmarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
 # include <string.h>
+# include "list.h"
 
 # define BUFF_SIZE 1000
-
-typedef struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
 
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -103,4 +98,4 @@ char	*file_get_content(const char *path);
 int		ft_strtablen(char **tab);
 size_t	ft_lstcount(t_list *alst);
 
-#endif /* !LIBFT_H */
+#endif

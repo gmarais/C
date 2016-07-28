@@ -75,7 +75,7 @@ else
 	CFLAGS=$(BASE_CFLAGS)
 endif
 # Exec
-EXEC=$(EXEC_DIR)/$(PROG_NAME).x86
+EXEC=$(EXEC_DIR)/$(PROG_NAME)
 # Libraries Directories
 	GLEW_LIB_DIR=/nfs/2013/g/gmarais/.brew/Cellar/glew/2.0.0
 	SDL2_LIB_DIR=/nfs/2013/g/gmarais/.brew/Cellar/sdl2/2.0.4
@@ -94,40 +94,6 @@ EXEC=$(EXEC_DIR)/$(PROG_NAME).x86
 	ENDL=""
 	ENDC=""
 	COMPILED="$@"
-endif
-#---------------------------------------------------------------------# Linux #
-ifeq ($(OS_DETECTED), Linux)
-# Compiler
-CC=gcc
-# Flags
-BASE_CFLAGS= -static-libgcc
-ifeq ($(DEBUG),yes)
-	CFLAGS=$(BASE_CFLAGS) -g
-else
-	CFLAGS=$(BASE_CFLAGS)
-endif
-# Exec
-EXEC=$(EXEC_DIR)\$(PROG_NAME).x86
-# Directories
-	OS_LIB_DIR=$(LIB_DIR)/Linux
-# Includes
-	INCLUDES=-I$(INC_DIR)
-# Links
-	LDFLAGS=-lSDL2 -lGL -lglew32
-# Commands
-	RM=rm -rf
-	RMDIR=rm -rf
-	ECHO=/bin/echo -en
-# Feedback
-	RED=\e[31m
-	GREEN=\e[32m
-	CYAN=\e[36m
-	ENDL=\n\e[0m
-	ENDC=\e[0m
-	COMPILED=•
-# get dynamic libraries rule
-DYNAMICS=
-CLEAN_DYNAMICS=
 endif
 #---------------------------------------------------------------# Compilation #
 # Sources

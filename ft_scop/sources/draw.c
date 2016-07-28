@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static void update_model_view(double delta_time)
+static void	update_model_view(double delta_time)
 {
 	if (g_env.rots[0] != 0)
 		rotate_x(&(g_env.mv), delta_time * (float)(g_env.rots[0]));
@@ -17,7 +29,7 @@ static void update_model_view(double delta_time)
 	}
 }
 
-static void update_texture_color_ratio(double delta_time)
+static void	update_texture_color_ratio(double delta_time)
 {
 	if (!g_env.text_is_on && g_env.col_to_text > 0)
 		g_env.col_to_text -= delta_time;
@@ -29,16 +41,16 @@ static void update_texture_color_ratio(double delta_time)
 		g_env.col_to_text = 0;
 }
 
-static void send_matrices_to_shader()
+static void	send_matrices_to_shader(void)
 {
 	glUniformMatrix4fv(g_env.shader->u_mdlview, 1, GL_FALSE, g_env.mv.val);
 	glUniformMatrix4fv(g_env.shader->u_proj, 1, GL_FALSE, g_env.proj.val);
 	glUniform1f(g_env.shader->u_coltotext, g_env.col_to_text);
 }
 
-void draw()
+void		draw(void)
 {
-	double delta_time;
+	double	delta_time;
 
 	delta_time = update_delta_time();
 	update_model_view(delta_time);

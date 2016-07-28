@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/21 17:28:06 by gmarais           #+#    #+#             */
-/*   Updated: 2013/11/21 17:36:55 by gmarais          ###   ########.fr       */
+/*   Created: 2013/11/19 11:47:33 by gmarais           #+#    #+#             */
+/*   Updated: 2014/03/23 18:53:46 by gmarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIST_H
+# define LIST_H
 
-void	ft_striter(char *s, void (*f)(char *))
+typedef struct		s_list
 {
-	while (*s)
-	{
-		f(s);
-		s++;
-	}
-}
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
+
+#endif

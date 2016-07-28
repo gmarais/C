@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   model.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "model.h"
 #include "shader.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 
-t_model *new_model(char *obj_filename)
+t_model		*new_model(char *obj_filename)
 {
-	t_model *model;
+	t_model	*model;
+
 	model = (t_model *)ft_memalloc(sizeof(t_model));
 	model->obj_filename = obj_filename;
-	return model;
+	return (model);
 }
 
-void delete_model(t_model *model)
+void		delete_model(t_model *model)
 {
 	ft_lstdel(&model->vertices, 0);
 	free(model->positions);
@@ -21,15 +34,15 @@ void delete_model(t_model *model)
 	free(model);
 }
 
-static void set_model_positions_colors(t_model *model)
+static void	set_model_positions_colors(t_model *model)
 {
-	t_list *iterator;
-	t_vertex *vertex;
-	int i;
-	int j;
+	t_list		*iterator;
+	t_vertex	*vertex;
+	int			i;
+	int			j;
 
-	model->positions = (float *)malloc(sizeof(float [model->v_size * 3]));
-	model->colors = (float *)malloc(sizeof(float [model->v_size * 4]));
+	model->positions = (float *)malloc(sizeof(float[model->v_size * 3]));
+	model->colors = (float *)malloc(sizeof(float[model->v_size * 4]));
 	iterator = model->vertices;
 	i = 0;
 	j = 0;
@@ -47,13 +60,13 @@ static void set_model_positions_colors(t_model *model)
 	}
 }
 
-static void set_model_uvs(t_model *model)
+static void	set_model_uvs(t_model *model)
 {
-	t_list *iterator;
-	t_vertex *vertex;
-	int i;
+	t_list		*iterator;
+	t_vertex	*vertex;
+	int			i;
 
-	model->uvs = (float *)malloc(sizeof(float [model->v_size * 2]));
+	model->uvs = (float *)malloc(sizeof(float[model->v_size * 2]));
 	iterator = model->vertices;
 	i = 0;
 	while (iterator != 0)
@@ -65,18 +78,17 @@ static void set_model_uvs(t_model *model)
 	}
 }
 
-int load_model(t_model *model)
+int			load_model(t_model *model)
 {
-	int	fd;
-	t_obj obj;
-	t_list *iterator;
+	int		fd;
+	t_obj	obj;
+	t_list	*iterator;
 
 	if ((fd = open(model->obj_filename, O_RDONLY)) <= 0
 		|| load_obj(&obj, fd))
 	{
 		close(fd);
-		ft_putendl_fd("Error while opening or loading obj file.", 2);
-		return - 1;
+		return (-1);
 	}
 	close(fd);
 	center_and_scale_obj(&obj);
@@ -89,5 +101,5 @@ int load_model(t_model *model)
 	delete_obj(&obj);
 	set_model_positions_colors(model);
 	set_model_uvs(model);
-	return 0;
+	return (0);
 }

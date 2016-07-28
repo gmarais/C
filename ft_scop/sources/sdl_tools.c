@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sdl_tools.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "sdl_tools.h"
 
-SDL_Surface	*copy_sdl_surface(SDL_Surface *surface)
+SDL_Surface		*copy_sdl_surface(SDL_Surface *surface)
 {
 	SDL_Surface		*result;
 
@@ -12,10 +24,10 @@ SDL_Surface	*copy_sdl_surface(SDL_Surface *surface)
 		surface->format->Gmask,
 		surface->format->Bmask,
 		surface->format->Amask);
-	return result;
+	return (result);
 }
 
-SDL_Surface* invert_pixels(SDL_Surface *s)
+SDL_Surface		*invert_pixels(SDL_Surface *s)
 {
 	unsigned char	*pix_src;
 	unsigned char	*pix_inv;
@@ -32,11 +44,11 @@ SDL_Surface* invert_pixels(SDL_Surface *s)
 		j = 0;
 		while (j < s->w * s->format->BytesPerPixel)
 		{
-			pix_inv[(s->w * s->format->BytesPerPixel * (s->h - 1 - i)) + j]
-				= pix_src[(s->w * s->format->BytesPerPixel * i) + j];
+			pix_inv[(s->w * s->format->BytesPerPixel * (s->h - 1 - i)) + j] =
+				pix_src[(s->w * s->format->BytesPerPixel * i) + j];
 			j++;
 		}
 		i++;
 	}
-	return result;
+	return (result);
 }

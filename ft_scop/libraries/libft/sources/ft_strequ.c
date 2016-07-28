@@ -9,6 +9,7 @@
 /*   Updated: 2013/11/29 17:32:22 by gmarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int		ft_strequ(char const *s1, char const *s2)

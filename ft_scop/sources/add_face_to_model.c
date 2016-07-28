@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_face_to_model.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "model.h"
 #include "time_tools.h"
 
@@ -25,8 +37,8 @@ void		add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model)
 	t_vertex	vertex;
 	float		random_color[SIZE_RGBA];
 
-	i = 0;
-	while (i < 3)
+	i = -1;
+	while (++i < 3)
 	{
 		if ((tmp = ft_lstgetone(obj.v, obj_face[i][0] - 1)))
 			ft_memcpy(&vertex.position, tmp->content, sizeof(float [3]));
@@ -44,6 +56,5 @@ void		add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model)
 		tmp = ft_lstnew(&vertex, sizeof(t_vertex));
 		ft_lstadd_back(&model->vertices, tmp);
 		model->v_size++;
-		i++;
 	}
 }

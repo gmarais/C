@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarais <gmarais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/11/20 17:52:23 by gmarais           #+#    #+#             */
+/*   Updated: 2013/11/25 21:08:25 by gmarais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 t_env	g_env;
 
-static void cleanQuit()
+static void	clean_quit(void)
 {
 	if (g_env.context != 0)
 	{
@@ -29,15 +41,15 @@ static void cleanQuit()
 	SDL_Quit();
 }
 
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	char *obj_file;
-	char *img_file;
+	char	*obj_file;
+	char	*img_file;
 
 	obj_file = ac > 1 ? av[1] : BASE_OBJ;
 	img_file = ac > 2 ? av[2] : BASE_IMG;
 	if (create_window(obj_file, img_file) == 0)
 		main_loop();
-	cleanQuit();
-	return 0;
+	clean_quit();
+	return (0);
 }
