@@ -71,13 +71,13 @@ int load_model(t_model *model)
 	t_obj obj;
 	t_list *iterator;
 
-	if ((fd = open(model->obj_filename, O_RDONLY)) <= 0)
+	if ((fd = open(model->obj_filename, O_RDONLY)) <= 0
+		|| load_obj(&obj, fd))
 	{
 		close(fd);
-		ft_putendl_fd("Error opening obj file.", 2);
+		ft_putendl_fd("Error while opening or loading obj file.", 2);
 		return - 1;
 	}
-	load_obj(&obj, fd);
 	close(fd);
 	center_and_scale_obj(&obj);
 	iterator = obj.f;

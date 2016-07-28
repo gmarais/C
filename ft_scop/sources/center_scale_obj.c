@@ -1,6 +1,9 @@
 #include "model.h"
 
-static void initiate_min_max(float (*min)[3], float (*max)[3], float (*abs_min_max)[2], t_list *tmp)
+static void initiate_min_max(float (*min)[3]
+	, float (*max)[3]
+	, float (*abs_min_max)[2]
+	, t_list *tmp)
 {
 	int		i;
 
@@ -18,10 +21,13 @@ static void initiate_min_max(float (*min)[3], float (*max)[3], float (*abs_min_m
 	}
 }
 
-static void set_min_and_max(float (*min)[3], float (*max)[3], float (*abs_min_max)[2], t_obj *obj)
+static void set_min_and_max(float (*min)[3]
+	, float (*max)[3]
+	, float (*abs_min_max)[2]
+	, t_obj *obj)
 {
-	int i;
-	t_list *tmp;
+	int		i;
+	t_list	*tmp;
 
 	tmp = obj->v;
 	if (tmp)
@@ -46,10 +52,10 @@ static void set_min_and_max(float (*min)[3], float (*max)[3], float (*abs_min_ma
 
 static void center_obj(t_obj *obj, float min[3], float max[3])
 {
-	float offset[3];
-	float abs_middle[3];
-	t_list *tmp;
-	int i;
+	float	offset[3];
+	float	abs_middle[3];
+	t_list	*tmp;
+	int		i;
 
 	i = -1;
 	while (++i < 3)
@@ -69,12 +75,14 @@ static void center_obj(t_obj *obj, float min[3], float max[3])
 	}
 }
 
-static void scale_obj(t_obj *obj, float (*abs_min_max)[2], float wanted_size)
+static void scale_obj(t_obj *obj
+	, float (*abs_min_max)[2]
+	, float wanted_size)
 {
-	float correction;
-	float total_size;
-	t_list *tmp;
-	int i;
+	float	correction;
+	float	total_size;
+	t_list	*tmp;
+	int		i;
 
 	total_size = ft_absf((*abs_min_max)[0]) + ft_absf((*abs_min_max)[1]);
 	correction = wanted_size / total_size;
@@ -92,11 +100,11 @@ static void scale_obj(t_obj *obj, float (*abs_min_max)[2], float wanted_size)
 
 void center_and_scale_obj(t_obj *obj)
 {
-	float min[3];
-	float max[3];
-	float abs_min_max[2];
-	int i;
-	t_list *tmp;
+	float	min[3];
+	float	max[3];
+	float	abs_min_max[2];
+	int		i;
+	t_list	*tmp;
 
 	set_min_and_max(&min, &max, &abs_min_max, obj);
 	center_obj(obj, min, max);

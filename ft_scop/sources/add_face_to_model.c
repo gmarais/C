@@ -1,7 +1,7 @@
 #include "model.h"
 #include "time_tools.h"
 
-static void add_zy_vt_to_vertex(t_vertex *vertex)
+static void	add_zy_vt_to_vertex(t_vertex *vertex)
 {
 	float vt[2];
 
@@ -10,7 +10,7 @@ static void add_zy_vt_to_vertex(t_vertex *vertex)
 	ft_memcpy(&vertex->tex_coord, vt, sizeof(float [2]));
 }
 
-static void set_random_color(float (*color)[4])
+static void	set_random_color(float (*color)[4])
 {
 	(*color)[e_rgba_r] = custom_rand();
 	(*color)[e_rgba_g] = custom_rand();
@@ -18,12 +18,12 @@ static void set_random_color(float (*color)[4])
 	(*color)[e_rgba_a] = 1;
 }
 
-void add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model)
+void		add_face_to_model(t_obj obj, int obj_face[3][3], t_model *model)
 {
-	t_list *tmp;
-	int i;
-	t_vertex vertex;
-	float random_color[SIZE_RGBA];
+	t_list		*tmp;
+	int			i;
+	t_vertex	vertex;
+	float		random_color[SIZE_RGBA];
 
 	i = 0;
 	while (i < 3)

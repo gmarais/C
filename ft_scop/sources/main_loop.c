@@ -50,10 +50,20 @@ static int process_inputs()
 	return 0;
 }
 
+static void init_model_view()
+{
+	const float eye[3] = {5, 5, 5};
+	const float center[3] = {0, 0, 0};
+	const float up[3] = {0, 1, 0};
+
+	g_env.mv = look_at(eye, center, up);
+}
+
 void main_loop()
 {
 	short int exited;
 
+	init_model_view();
 	exited = 0;
 	while (!exited)
 	{

@@ -141,6 +141,10 @@ SRC=main.c \
 	sdl_tools.c \
 	texture.c \
 	math_tools.c \
+	debug.c \
+	lookat_projection.c \
+	matrix_transform.c \
+	vector.c \
 	time_tools.c \
 	get_next_words.c \
 	load_obj.c \

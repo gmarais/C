@@ -58,11 +58,7 @@ int		load_obj(t_obj *obj, int fd)
 	char **words;
 	int words_len;
 
-	obj->v = 0;
-	obj->color = 0;
-	obj->vn = 0;
-	obj->vt = 0;
-	obj->f = 0;
+	ft_bzero(obj, sizeof(t_obj));
 	while ((words_len = get_next_words(&words, fd)) > 0)
 	{
 		if (words_len >= 4 && ft_strcmp(words[0], "v") == 0)
@@ -77,6 +73,8 @@ int		load_obj(t_obj *obj, int fd)
 			add_face_tab_lst(&obj->f, words, words_len);
 		clean_words_tab(words, words_len);
 	}
+	if (ft_lstcount(obj->v) == 0 || ft_lstcount(obj->f) == 0)
+		return -1;
 	return 0;
 }
 

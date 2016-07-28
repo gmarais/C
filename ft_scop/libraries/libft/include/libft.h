@@ -101,5 +101,6 @@ int		ft_getline(char **line, int const fd);
 double	ft_atof(char *str);
 char	*file_get_content(const char *path);
 int		ft_strtablen(char **tab);
+size_t	ft_lstcount(t_list *alst);
 
 #endif /* !LIBFT_H */
