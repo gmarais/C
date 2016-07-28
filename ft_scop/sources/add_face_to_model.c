@@ -17,8 +17,10 @@ static void	add_zy_vt_to_vertex(t_vertex *vertex)
 {
 	float vt[2];
 
-	vt[e_uv_u] = (vertex->position[e_xyz_z] + MAX_OBJ_SCALE / 2) / MAX_OBJ_SCALE;
-	vt[e_uv_v] = (vertex->position[e_xyz_y] + MAX_OBJ_SCALE / 2) / MAX_OBJ_SCALE;
+	vt[e_uv_u] =
+		(vertex->position[e_xyz_z] + MAX_OBJ_SCALE / 2) / -MAX_OBJ_SCALE;
+	vt[e_uv_v] =
+		(vertex->position[e_xyz_y] + MAX_OBJ_SCALE / 2) / MAX_OBJ_SCALE;
 	ft_memcpy(&vertex->tex_coord, vt, sizeof(float [2]));
 }
 
